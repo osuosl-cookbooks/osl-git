@@ -3,3 +3,24 @@ suites:
   - name: default
     run_list:
       - recipe[osl-git::default]
+  - name: git-credentials-databag
+    run_list:
+      - recipe[osl-git::default]
+      - recipe[osl-git-test::databag]
+    attributes:
+      osl-git:
+        secrets_databag: 'osl-git'
+        secrets_item:    'item1'
+  - name: git-credentials-attributes
+    run_list:
+      - recipe[osl-git::default]
+      - recipe[osl-git-test::attributes]
+    attributes:
+      osl-git:
+        secrets:
+          credentials:
+            - https://user:pass@example.net
+            - ssh://foo:bar@example.org
+            - test:duplicates@example.com
+            - test:duplicates@example.com
+            - https://<%= ENV['GITHUB_TOKEN'] %>@github.com

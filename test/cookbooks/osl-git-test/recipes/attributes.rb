@@ -1,6 +1,6 @@
 #
-# Cookbook:: osl-git
-# Recipe:: default
+# Cookbook:: osl-git-test
+# Recipe:: attributes
 #
 # Copyright:: 2018, Oregon State University
 #
@@ -16,4 +16,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-include_recipe 'git'
+# Tests git credentials when falling back to creds in attributes
+
+git_credentials 'Using default file' do
+  notifies :sync, 'git[/root/test]'
+end
+
+git_credentials 'Specifying file in property' do
+  file '/root/.git-credentials-2'
+end
+
+# Test cloning a git repo that requires credentials
+# (Use ENV variables referenced in attributes in .kitchen.yml)
+git '/root/test' do
+  repository 'https://github.com/osuosl-cookbooks/test-cookbook.git'
+  action :nothing
+end

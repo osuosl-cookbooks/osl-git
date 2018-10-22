@@ -1,0 +1,7 @@
+{
+  "id": "item1",
+  "credentials": [
+    "https://name:token@example.123",
+    "ssh://bar:foo@example.xyz"
+  ]
+}

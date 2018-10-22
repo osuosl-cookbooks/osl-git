@@ -1,0 +1,7 @@
+{
+  "id": "item2",
+  "credentials": [
+    "more:duplicates@example.abc",
+    "more:duplicates@example.abc"
+  ]
+}
