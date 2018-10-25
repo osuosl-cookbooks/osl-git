@@ -13,7 +13,7 @@ describe file '/root/.git-credentials' do
   it { should be_mode '600' }
   [
     %r{https://name:token@example.123},
-    %r{ssh://bar:foo@example.xyz}
+    %r{ssh://bar:foo@example.xyz},
   ].each do |line|
     its(:content) { should match line }
   end

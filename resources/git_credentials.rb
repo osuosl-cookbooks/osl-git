@@ -1,8 +1,8 @@
 resource_name :git_credentials
 
 property :path,  String, name_property: true
-property :owner, String
-property :group, String
+property :owner, String, default: 'root'
+property :group, String, default: 'root'
 property :mode, [String, Integer], default: '0600'
 property :secrets_databag, String, default: node['osl-git']['secrets_databag']
 property :secrets_item,    String, default: node['osl-git']['secrets_item']

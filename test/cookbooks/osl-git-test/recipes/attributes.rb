@@ -22,7 +22,7 @@
 git_credentials '/root/.git-credentials'
 
 # Testing non-default properties
-user  'foo' do
+user 'foo' do
   manage_home true
 end
 

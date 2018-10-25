@@ -69,7 +69,10 @@ The logic for choosing databags vs attributes is in `libraries/default.rb`
 The full syntax for all of the resource's properties is:
 ```ruby
 git_credentials 'name' do
-  file                 String # default value: /root/.git-credentials
+  path                 String # default value: /root/.git-credentials
+  owner                String # default value: root
+  group                String # default value: root
+  mode                 String, Integer # default value: 0600
   secrets_databag      String # default value: node['osl-git']['secrets_databag']
   secrets_item         String # default value: node['osl-git']['secrets_item']
   action               Symbol # defaults to :create
