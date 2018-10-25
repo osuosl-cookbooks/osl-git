@@ -26,7 +26,7 @@ action :create do
     mode  new_resource.mode
 
     secrets = git_credential_secrets(new_resource.secrets_databag, new_resource.secrets_item)
-    variables['credentials'] = secrets['credentials'] unless secrets['credentials'].empty?
+    variables(credentials: secrets['credentials']) unless secrets['credentials'].empty?
 
     action :create
   end
