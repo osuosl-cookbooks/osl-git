@@ -18,17 +18,36 @@
 
 # Tests git credentials when falling back to creds in attributes
 
-git_credentials 'Using default file' do
-  notifies :sync, 'git[/root/test]'
+# Testing default properties
+git_credentials '/root/.git-credentials'
+
+# Testing non-default properties
+user  'foo' do
+  manage_home true
 end
 
-git_credentials 'Specifying file in property' do
-  file '/root/.git-credentials-2'
+group 'bar'
+
+git_credentials 'Testing non-default properties' do
+  path '/home/foo/.git-credentials'
+  owner 'foo'
+  group 'bar'
+  mode '0400'
 end
 
-# Test cloning a git repo that requires credentials
+# Testing git repo clone that requires credentials
 # (Use ENV variables referenced in attributes in .kitchen.yml)
 git '/root/test' do
   repository 'https://github.com/osuosl-cookbooks/test-cookbook.git'
-  action :nothing
+end
+
+git '/home/foo/test' do
+  repository 'https://github.com/osuosl-cookbooks/test-cookbook.git'
+end
+
+# Testing :delete action
+git_credentials '/root/.git-credentials-deleted'
+
+git_credentials '/root/.git-credentials-deleted' do
+  action :delete
 end

@@ -1,35 +1,41 @@
 resource_name :git_credentials
 
-property :file, String, default: '/root/.git-credentials'
+property :path,  String, name_property: true
+property :owner, String
+property :group, String
+property :mode, [String, Integer], default: '0600'
 property :secrets_databag, String, default: node['osl-git']['secrets_databag']
-property :secrets_item, String, default: node['osl-git']['secrets_item']
+property :secrets_item,    String, default: node['osl-git']['secrets_item']
 
 default_action :create
 
 action :create do
-  with_run_context :root do
-    execute "git config --global credential.helper 'store --file #{new_resource.file}'"
+  git_config 'credential.helper' do
+    value "store --file #{new_resource.path}"
+    scope 'global'
+    user  new_resource.owner
+    group new_resource.group
+  end
 
-    edit_resource(:template, new_resource.file) do |new_resource|
-      cookbook 'osl-git'
-      source 'git-credentials.erb'
-      mode '0600'
+  template new_resource.path do
+    cookbook 'osl-git'
+    source 'git-credentials.erb'
+    sensitive true
+    owner new_resource.owner
+    group new_resource.group
+    mode  new_resource.mode
 
-      secrets = git_credential_secrets(new_resource.secrets_databag, new_resource.secrets_item)
+    secrets = git_credential_secrets(new_resource.secrets_databag, new_resource.secrets_item)
+    variables['credentials'] = secrets['credentials'] unless secrets['credentials'].empty?
 
-      unless secrets['credentials'].empty?
-        variables['credentials'] ||= []
-        variables['credentials'] << secrets['credentials']
-        variables['credentials'] = variables['credentials'].flatten.uniq
-      end
-
-      action :nothing
-      delayed_action :create
-      notifies :trigger, new_resource, :immediately
-    end
+    action :create
   end
 end
 
-action :trigger do
-  new_resource.updated_by_last_action(true)
+action :delete do
+  execute 'git config --global --unset-all credential.helper'
+
+  file new_resource.path do
+    action :delete
+  end
 end

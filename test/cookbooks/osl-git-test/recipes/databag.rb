@@ -21,17 +21,25 @@
 node.default['osl-git']['secrets_databag'] = 'osl-git'
 node.default['osl-git']['secrets_item']    = 'item1'
 
-git_credentials 'Default to fetching credentials from osl-git:item1 databag'
-
-git_credentials 'Fetch credentials from different databag (testing accumulation)' do
-  secrets_databag 'osl-git'
-  secrets_item    'item2'
-  notifies :sync, 'git[/root/test]'
+# Testing default databag (from attributes)
+git_credentials '/root/.git-credentials' do
+  notifies :sync, 'git[/root/test]', :immediately
 end
 
-# Test cloning a git repo that requires credentials
-# (Add to one of the databags)
+# Testing git repo clone that requires credentials
+# (Add your credentials to osl-git:item1 databag for tests to succeed)
 git '/root/test' do
   repository 'https://github.com/osuosl-cookbooks/test-cookbook.git'
-  action :nothing
+end
+
+# Testing databag specified in properties
+git_credentials '/root/.git-credentials-2' do
+  secrets_databag 'osl-git'
+  secrets_item    'item2'
+end
+
+# Testing git repo clone that requires credentials
+# (Add your credentials to osl-git:item2 databag for tests to succeed)
+git '/root/test2' do
+  repository 'https://github.com/osuosl-cookbooks/test-cookbook.git'
 end
