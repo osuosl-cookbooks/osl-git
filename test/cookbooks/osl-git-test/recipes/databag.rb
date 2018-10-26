@@ -27,9 +27,8 @@ git_credentials '/root/.git-credentials' do
 end
 
 # Testing git repo clone that requires credentials
-# (Add your credentials to osl-git:item1 databag for tests to succeed)
 git '/root/test' do
-  repository 'https://github.com/osuosl-cookbooks/test-cookbook.git'
+  repository 'https://git.osuosl.org/osuosl/test.git'
 end
 
 # Testing databag specified in properties
@@ -39,7 +38,6 @@ git_credentials '/root/.git-credentials-2' do
 end
 
 # Testing git repo clone that requires credentials
-# (Add your credentials to osl-git:item2 databag for tests to succeed)
 git '/root/test2' do
-  repository 'https://github.com/osuosl-cookbooks/test-cookbook.git'
+  repository 'https://git.osuosl.org/osuosl/test.git'
 end

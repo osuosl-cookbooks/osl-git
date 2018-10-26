@@ -136,21 +136,6 @@ The `git_credentials` resource expects a `credentials` list in databag items:
 }
 ```
 
-Testing
--------
-To test that stored credentials can actually be used to clone a private repostiory, you must set
-up your own credentials for the `git-credentials-attributes` and `git-credentials-databag` test
-suites.
-
-**Note:** If you are not a part of the Open Source Lab, you will have to change the repo in the
-test cookbook to a private repo that you have access to.
-
-For `git-credentials-attributes` add your credentials to the list in `.kitchen.yml` or set your
-GitHub token in the `GITHUB_TOKEN` environmental variable.
-
-For `git-credentials-databag` add your credentials to one of the databags in
-`test/integration/data_bags/osl-git`.
-
 Contributing
 ------------
 

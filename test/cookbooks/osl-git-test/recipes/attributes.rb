@@ -38,11 +38,11 @@ end
 # Testing git repo clone that requires credentials
 # (Use ENV variables referenced in attributes in .kitchen.yml)
 git '/root/test' do
-  repository 'https://github.com/osuosl-cookbooks/test-cookbook.git'
+  repository 'https://git.osuosl.org/osuosl/test.git'
 end
 
 git '/home/foo/test' do
-  repository 'https://github.com/osuosl-cookbooks/test-cookbook.git'
+  repository 'https://git.osuosl.org/osuosl/test.git'
 end
 
 # Testing :delete action
