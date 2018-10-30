@@ -8,6 +8,12 @@ property :secrets_item,    String, default: node['osl-git']['secrets_item']
 default_action :create
 
 action :create do
+  git_config 'credential.useHttpPath' do
+    value 'true'
+    scope 'global'
+    user  new_resource.owner
+  end
+
   git_config 'credential.helper' do
     value "store --file #{new_resource.path}"
     scope 'global'

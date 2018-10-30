@@ -22,6 +22,7 @@ describe file '/root/.gitconfig' do
   it { should be_file }
   it { should be_owned_by 'root' }
   its(:content) { should match %r{helper = store --file /root/\.git-credentials} }
+  its(:content) { should match(/useHttpPath = true/) }
 end
 
 describe file '/root/test/.git' do
@@ -44,6 +45,7 @@ describe file '/home/foo/.gitconfig' do
   it { should be_file }
   it { should be_owned_by 'foo' }
   its(:content) { should match %r{helper = store --file /home/foo/\.git-credentials} }
+  its(:content) { should match(/useHttpPath = true/) }
 end
 
 describe file '/home/bar/.git-credentials' do
@@ -54,4 +56,5 @@ describe file '/home/bar/.gitconfig' do
   it { should be_file }
   it { should be_owned_by 'bar' }
   its(:content) { should_not match(/helper/) }
+  its(:content) { should_not match(/useHttpPath/) }
 end
