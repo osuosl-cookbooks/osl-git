@@ -8,11 +8,11 @@ end
 
 describe file '/root/.git-credentials' do
   it { should be_file }
-  it { should be_owned_by     'root' }
+  it { should be_owned_by 'root' }
   it { should be_mode '600' }
   [
     %r{https://name:token@example.123},
-    %r{bar:foo@example.xyz},
+    /bar:foo@example.xyz/,
   ].each do |line|
     its(:content) { should match line }
   end
@@ -20,7 +20,7 @@ end
 
 describe file '/root/.gitconfig' do
   it { should be_file }
-  it { should be_owned_by     'root' }
+  it { should be_owned_by 'root' }
   its(:content) { should match %r{helper = store --file /root/\.git-credentials} }
 end
 
@@ -34,7 +34,7 @@ describe file '/home/foo/.git-credentials' do
   it { should be_mode '600' }
   [
     %r{https://username:secret@example.456},
-    %r{foobar:barfoo@example.abc},
+    /foobar:barfoo@example.abc/,
   ].each do |line|
     its(:content) { should match line }
   end

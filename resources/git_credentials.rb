@@ -30,7 +30,7 @@ end
 action :delete do
   execute 'git config --global --unset-all credential.helper' do
     user new_resource.owner
-    environment ({'HOME' => Dir.home(new_resource.owner)})
+    environment 'HOME' => Dir.home(new_resource.owner)
   end
 
   file new_resource.path do
