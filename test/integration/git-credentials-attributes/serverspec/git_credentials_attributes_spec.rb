@@ -14,10 +14,16 @@ describe file '/root/.git-credentials' do
   [
     %r{https://user:pass@example.net},
     %r{ssh://foo:bar@example.org},
-    /test:duplicates@example.com/,
   ].each do |line|
     its(:content) { should match line }
   end
+end
+
+describe file '/root/.gitconfig' do
+  it { should be_file }
+  it { should be_owned_by     'root' }
+  it { should be_grouped_into 'root' }
+  its(:content) { should match %r{helper = store --file /root/\.git-credentials} }
 end
 
 describe file '/root/test/.git' do
@@ -28,24 +34,28 @@ describe file '/home/foo/.git-credentials' do
   it { should be_file }
   it { should be_owned_by     'foo' }
   it { should be_grouped_into 'bar' }
-  it { should be_mode '400' }
+  it { should be_mode '640' }
   [
     %r{https://user:pass@example.net},
     %r{ssh://foo:bar@example.org},
-    /test:duplicates@example.com/,
   ].each do |line|
     its(:content) { should match line }
   end
 end
 
 describe file '/home/foo/.gitconfig' do
+  it { should be_file }
+  it { should be_owned_by     'foo' }
+  it { should be_grouped_into 'bar' }
   its(:content) { should match %r{helper = store --file /home/foo/\.git-credentials} }
 end
 
-describe file '/root/.git-credentials-deleted' do
+describe file '/home/bar/.git-credentials' do
   it { should_not exist }
 end
 
-describe file '/root/.gitconfig' do
+describe file '/home/bar/.gitconfig' do
+  it { should be_file }
+  it { should be_owned_by     'bar' }
   its(:content) { should_not match(/helper/) }
 end

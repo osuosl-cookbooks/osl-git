@@ -110,18 +110,18 @@ The path to the file where git credentials will be stored.
 
 `owner` - **Ruby Type:** String
 
-The name of the user that owns the git credentials store file and the user who's git configuration
-will be updated.
+The user who's git configuration will be updated and the owner of the git credentials store file
+and the git config file.
 
 `group` - **Ruby Type:** String
 
-The name of the group belonging to the git credentials store file and git configuration. If
+The name of the group belonging to the git credentials store file and git config file. If
 unspecified, the existing group won't change or a new file will be created using the default POSIX
 group.
 
 `mode` - **Ruby Type:** String, Integer | **Default Value::** '0600'
 
-The mode of the git credentials store file.
+The mode of the git credentials store file and git config file.
 
 `secrets_databag` - **Ruby Type:** String | **Default Value:** `node['osl-git']['secrets_databag']`
 

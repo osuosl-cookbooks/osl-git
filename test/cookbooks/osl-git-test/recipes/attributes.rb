@@ -16,10 +16,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Tests git credentials when falling back to creds in attributes
+# This recipe tests git credentials when falling back to attributes (in testing env)
 
 # Testing default properties
 git_credentials 'root'
+
+git '/root/test' do
+  user 'root'
+  repository 'https://git.osuosl.org/osuosl/test.git'
+end
 
 # Testing non-default properties
 user 'foo' do
@@ -28,29 +33,33 @@ end
 
 group 'bar'
 
-# Testing non-default properties
 git_credentials 'foo' do
   path '/home/foo/.git-credentials'
   group 'bar'
-  mode '0400'
-end
-
-# Testing git repo clone that requires credentials
-# (Use ENV variables referenced in attributes in .kitchen.yml)
-git '/root/test' do
-  repository 'https://git.osuosl.org/osuosl/test.git'
+  mode '0640'
 end
 
 git '/home/foo/test' do
+  user 'foo'
   repository 'https://git.osuosl.org/osuosl/test.git'
 end
 
 # Testing :delete action
-git_credentials 'root' do
-  path '/root/.git-credentials-deleted'
+user 'bar' do
+  group 'bar'
+  manage_home true
 end
 
-git_credentials 'root' do
-  path '/root/.git-credentials-deleted'
+file '/home/bar/.git-credentials' do
+  owner 'bar'
+end
+
+file '/home/bar/.gitconfig' do
+  owner 'bar'
+  content '[credential]
+        helper = store --file /home/foo/.git-credentials'
+end
+
+git_credentials 'bar' do
   action :delete
 end
