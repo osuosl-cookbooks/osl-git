@@ -1,8 +1,8 @@
 resource_name :git_credentials
 
-property :path,  String, name_property: true
-property :owner, String, default: 'root'
-property :group, String, default: 'root'
+property :path,  String, default: lazy { |r| Dir.home(r.owner) + '/.git-credentials' }
+property :owner, String, name_property: true
+property :group, String
 property :mode, [String, Integer], default: '0600'
 property :secrets_databag, String, default: node['osl-git']['secrets_databag']
 property :secrets_item,    String, default: node['osl-git']['secrets_item']
@@ -14,7 +14,7 @@ action :create do
     value "store --file #{new_resource.path}"
     scope 'global'
     user  new_resource.owner
-    group new_resource.group
+    group new_resource.group unless new_resource.group.nil?
   end
 
   template new_resource.path do
@@ -22,7 +22,7 @@ action :create do
     source 'git-credentials.erb'
     sensitive true
     owner new_resource.owner
-    group new_resource.group
+    group new_resource.group unless new_resource.group.nil?
     mode  new_resource.mode
 
     secrets = git_credential_secrets(new_resource.secrets_databag, new_resource.secrets_item)

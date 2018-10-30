@@ -22,7 +22,7 @@ node.default['osl-git']['secrets_databag'] = 'osl-git'
 node.default['osl-git']['secrets_item']    = 'item1'
 
 # Testing default databag (from attributes)
-git_credentials '/root/.git-credentials' do
+git_credentials 'root' do
   notifies :sync, 'git[/root/test]', :immediately
 end
 
@@ -32,7 +32,8 @@ git '/root/test' do
 end
 
 # Testing databag specified in properties
-git_credentials '/root/.git-credentials-2' do
+git_credentials 'root' do
+  path '/root/.git-credentials-2'
   secrets_databag 'osl-git'
   secrets_item    'item2'
 end

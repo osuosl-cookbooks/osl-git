@@ -19,7 +19,7 @@
 # Tests git credentials when falling back to creds in attributes
 
 # Testing default properties
-git_credentials '/root/.git-credentials'
+git_credentials 'root'
 
 # Testing non-default properties
 user 'foo' do
@@ -28,9 +28,9 @@ end
 
 group 'bar'
 
-git_credentials 'Testing non-default properties' do
+# Testing non-default properties
+git_credentials 'foo' do
   path '/home/foo/.git-credentials'
-  owner 'foo'
   group 'bar'
   mode '0400'
 end
@@ -46,8 +46,11 @@ git '/home/foo/test' do
 end
 
 # Testing :delete action
-git_credentials '/root/.git-credentials-deleted'
+git_credentials 'root' do
+  path '/root/.git-credentials-deleted'
+end
 
-git_credentials '/root/.git-credentials-deleted' do
+git_credentials 'root' do
+  path '/root/.git-credentials-deleted'
   action :delete
 end

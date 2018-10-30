@@ -69,9 +69,9 @@ The logic for choosing databags vs attributes is in `libraries/default.rb`
 The full syntax for all of the resource's properties is:
 ```ruby
 git_credentials 'name' do
-  path                 String # default value: /root/.git-credentials
-  owner                String # default value: root
-  group                String # default value: root
+  path                 String # default value: ~/.git-credentials
+  owner                String # defaults to 'name' if not specified
+  group                String
   mode                 String, Integer # default value: 0600
   secrets_databag      String # default value: node['osl-git']['secrets_databag']
   secrets_item         String # default value: node['osl-git']['secrets_item']
@@ -79,11 +79,10 @@ git_credentials 'name' do
 end
 ```
 
-An example where git credentials are stored in an alternative path and a non-default databag
-item is used:
+An example where git credentials is used with an explicitly specified databag:
 ```ruby
-git_credentials 'default' do
-  file '/root/.config/git/credentials'
+git_credentials 'root' do
+  path '/root/.git-credentials'
   secrets_databag 'secrets'
   secrets_item 'git_tokens'
 end
@@ -96,23 +95,33 @@ Enable the git credentials store and populates `file` with credentials from
 `secrets_databag:secrets_item` (or from `node['osl-git']['secrets']['credentials']` in a
 testing environment).
 
-`:trigger`
+`:delete`
 
-Mark the resource as having been updated to trigger notifications. (Used in the resource code
-to work around [chef#6987](https://github.com/chef/chef/issues/6987).)
-
-Enable the git credentials store and populates `file` with credentials from
-`secrets_databag:secrets_item` (or from `node['osl-git']['secrets']['credentials']` in a
-testing environment).
+Delete the git credentials store file and removes it from the global git configuration.
 
 `:nothing`
 
 Do nothing until notified by another resource.
 
 #### Properties
-`file` - **Ruby Type:** String | **Default Value:** `/root/.git-credentials`
+`path` - **Ruby Type:** String | **Default Value:** '~/.git-credentials'
 
-The path to store credentials in that the git credentials store will read from.
+The path to the file where git credentials will be stored.
+
+`owner` - **Ruby Type:** String
+
+The name of the user that owns the git credentials store file and the user who's git configuration
+will be updated.
+
+`group` - **Ruby Type:** String
+
+The name of the group belonging to the git credentials store file and git configuration. If
+unspecified, the existing group won't change or a new file will be created using the default POSIX
+group.
+
+`mode` - **Ruby Type:** String, Integer | **Default Value::** '0600'
+
+The mode of the git credentials store file.
 
 `secrets_databag` - **Ruby Type:** String | **Default Value:** `node['osl-git']['secrets_databag']`
 
