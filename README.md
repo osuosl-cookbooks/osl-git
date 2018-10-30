@@ -71,8 +71,6 @@ The full syntax for all of the resource's properties is:
 git_credentials 'name' do
   path                 String # default value: ~/.git-credentials
   owner                String # defaults to 'name' if not specified
-  group                String
-  mode                 String, Integer # default value: 0600
   secrets_databag      String # default value: node['osl-git']['secrets_databag']
   secrets_item         String # default value: node['osl-git']['secrets_item']
   action               Symbol # defaults to :create
@@ -112,16 +110,6 @@ The path to the file where git credentials will be stored.
 
 The user who's git configuration will be updated and the owner of the git credentials store file
 and the git config file.
-
-`group` - **Ruby Type:** String
-
-The name of the group belonging to the git credentials store file and git config file. If
-unspecified, the existing group won't change or a new file will be created using the default POSIX
-group.
-
-`mode` - **Ruby Type:** String, Integer | **Default Value::** '0600'
-
-The mode of the git credentials store file and git config file.
 
 `secrets_databag` - **Ruby Type:** String | **Default Value:** `node['osl-git']['secrets_databag']`
 

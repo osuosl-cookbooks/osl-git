@@ -34,12 +34,7 @@ user 'foo' do
   manage_home true
 end
 
-group 'bar'
-
 git_credentials 'foo' do
-  path '/home/foo/.git-credentials'
-  group 'bar'
-  mode '0640'
   secrets_item 'item2'
 end
 
@@ -50,7 +45,6 @@ end
 
 # Testing :delete action
 user 'bar' do
-  group 'bar'
   manage_home true
 end
 

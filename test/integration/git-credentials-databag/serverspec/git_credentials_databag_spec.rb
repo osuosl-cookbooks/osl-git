@@ -9,7 +9,6 @@ end
 describe file '/root/.git-credentials' do
   it { should be_file }
   it { should be_owned_by     'root' }
-  it { should be_grouped_into 'root' }
   it { should be_mode '600' }
   [
     %r{https://name:token@example.123},
@@ -21,8 +20,7 @@ end
 
 describe file '/root/.gitconfig' do
   it { should be_file }
-  it { should be_owned_by 'root' }
-  it { should be_grouped_into 'root' }
+  it { should be_owned_by     'root' }
   its(:content) { should match %r{helper = store --file /root/\.git-credentials} }
 end
 
@@ -32,9 +30,8 @@ end
 
 describe file '/home/foo/.git-credentials' do
   it { should be_file }
-  it { should be_owned_by     'foo' }
-  it { should be_grouped_into 'bar' }
-  it { should be_mode '640' }
+  it { should be_owned_by 'foo' }
+  it { should be_mode '600' }
   [
     %r{https://username:secret@example.456},
     %r{foobar:barfoo@example.abc},
@@ -45,8 +42,7 @@ end
 
 describe file '/home/foo/.gitconfig' do
   it { should be_file }
-  it { should be_owned_by     'foo' }
-  it { should be_grouped_into 'bar' }
+  it { should be_owned_by 'foo' }
   its(:content) { should match %r{helper = store --file /home/foo/\.git-credentials} }
 end
 
