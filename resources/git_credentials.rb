@@ -4,12 +4,13 @@ property :path,  String, default: lazy { |r| Dir.home(r.owner) + '/.git-credenti
 property :owner, String, name_property: true
 property :secrets_databag, String, default: node['osl-git']['secrets_databag']
 property :secrets_item,    String, default: node['osl-git']['secrets_item']
+property :use_http_path, [TrueClass, FalseClass], default: true
 
 default_action :create
 
 action :create do
   git_config 'credential.useHttpPath' do
-    value 'true'
+    value new_resource.use_http_path.to_s
     scope 'global'
     user  new_resource.owner
   end

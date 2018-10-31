@@ -35,6 +35,7 @@ user 'foo' do
 end
 
 git_credentials 'foo' do
+  use_http_path false
   secrets_item 'item2'
 end
 

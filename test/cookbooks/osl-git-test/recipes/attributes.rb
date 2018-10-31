@@ -31,7 +31,9 @@ user 'foo' do
   manage_home true
 end
 
-git_credentials 'foo'
+git_credentials 'foo' do
+  use_http_path false
+end
 
 git '/home/foo/test' do
   user 'foo'

@@ -11,8 +11,8 @@ describe file '/root/.git-credentials' do
   it { should be_owned_by 'root' }
   it { should be_mode '600' }
   [
-    %r{https://name:token@example.123},
-    /bar:foo@example.xyz/,
+    %r{https://name:token@example.123/hello/world.git},
+    %r{bar:foo@example.xyz/foo/bar.git},
   ].each do |line|
     its(:content) { should match line }
   end
@@ -45,7 +45,7 @@ describe file '/home/foo/.gitconfig' do
   it { should be_file }
   it { should be_owned_by 'foo' }
   its(:content) { should match %r{helper = store --file /home/foo/\.git-credentials} }
-  its(:content) { should match(/useHttpPath = true/) }
+  its(:content) { should match(/useHttpPath = false/) }
 end
 
 describe file '/home/bar/.git-credentials' do
