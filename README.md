@@ -56,7 +56,8 @@ Resources
 Enables the [git credential store](https://git-scm.com/docs/git-credential-store) and stores
 credentials in the specified file.
 
-**In production** credentials are specified in a databag item, defaulting to the item
+**In production** credentials are specified in a databag item. When the databag item properties
+are not specified in the resource, these default to attributes:
 specified by this cookbook's attributes:
 * `node['osl-git']['secrets_databag']` 
 * `node['osl-git']['secrets_item']`
@@ -83,19 +84,21 @@ git_credentials 'root' do
   path '/root/.git-credentials'
   secrets_databag 'secrets'
   secrets_item 'git_tokens'
+  use_http_path true
 end
 ```
 
 #### Actions
 `:create`
 
-Enable the git credentials store and populates `file` with credentials from
-`secrets_databag:secrets_item` (or from `node['osl-git']['secrets']['credentials']` in a
-testing environment).
+Enable the git credentials store in the global git configuration and populate `path` with
+credentials from `secrets_databag:secrets_item` (or from
+`node['osl-git']['secrets']['credentials']` in a testing environment).
 
 `:delete`
 
-Delete the git credentials store file and removes it from the global git configuration.
+Delete the credentials file at `path` and disable the git credential store in the global git
+configuration.
 
 `:nothing`
 
@@ -104,12 +107,11 @@ Do nothing until notified by another resource.
 #### Properties
 `path` - **Ruby Type:** String | **Default Value:** '~/.git-credentials'
 
-The path to the file where git credentials will be stored.
+The path to the file where git credentials are stored.
 
 `owner` - **Ruby Type:** String
 
-The user who's git configuration will be updated and the owner of the git credentials store file
-and the git config file.
+The user who's git configuration will be updated and the owner of the git credentials store file.
 
 `secrets_databag` - **Ruby Type:** String | **Default Value:** `node['osl-git']['secrets_databag']`
 
@@ -119,6 +121,13 @@ The name of the databag where credentials are stored.
 
 The name of the databag item where credentials are stored.
 
+`use_http_path` - **Ruby Type:** Boolean | **Default Value:** true
+
+Whether or not to match stored credentials by the repo path in the remote's URL. When enabled, only
+credentials with a matching hostname and repo path will be applied. When disabled, only the
+credentials hostname must match the remote.
+[See git documentation on useHttpPath](https://git-scm.com/docs/gitcredentials#gitcredentials-useHttpPath)
+
 Databag
 -------
 The `git_credentials` resource expects a `credentials` list in databag items:
@@ -127,11 +136,13 @@ The `git_credentials` resource expects a `credentials` list in databag items:
 {
   "id": "git_tokens",
   "credentials": [
-    "https://username:token@github.com",
-    "foo:bar@gitlab.com"
+    "https://username:token@github.com/repo/path.git",
+    "foo:bar@gitlab.com/project/repo.git"
   ]
 }
 ```
+
+The above example assumes `use_http_path` is enabled and includes repo paths in URLs.
 
 Contributing
 ------------
