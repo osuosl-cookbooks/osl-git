@@ -1,0 +1,8 @@
+{
+  "id": "item1",
+  "credentials": [
+    "https://name:token@example.123/hello/world.git",
+    "bar:foo@example.xyz/foo/bar.git",
+    "https://gitlab+deploy-token-13:CWN8Fsjrtare7yAHkknj@git.osuosl.org/osuosl/test.git"
+  ]
+}

@@ -15,7 +15,7 @@ CENTOS_6 = {
 
 DEBIAN_8 = {
   platform: 'debian',
-  version: '8.6',
+  version: '8.8',
 }.freeze
 
 ALL_PLATFORMS = [
