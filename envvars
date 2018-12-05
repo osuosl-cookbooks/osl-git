@@ -1,0 +1,4 @@
+cookbook=osl-git
+version=1.0.0
+envs=~
+pr_link=https://github.com/osuosl-cookbooks/osl-git/pull/1
