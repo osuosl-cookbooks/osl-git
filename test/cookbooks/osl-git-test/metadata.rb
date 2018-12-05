@@ -9,4 +9,6 @@ description      'Installs/Configures osl-git-test'
 long_description 'Installs/Configures osl-git-test'
 version          '0.1.0'
 
+depends          'osl-git'
+
 supports         'centos', '~> 7.0'
