@@ -30,35 +30,46 @@ git '/root/test' do
 end
 
 # Testing non-default properties
+group 'foo'
+
 user 'foo' do
+  group 'foo'
   manage_home true
 end
 
 git_credentials 'foo' do
+  group 'foo'
   use_http_path false
   secrets_item 'item2'
 end
 
 git '/home/foo/test' do
   user 'foo'
+  group 'foo'
   repository 'https://git.osuosl.org/osuosl/test.git'
 end
 
 # Testing :delete action
+group 'bar'
+
 user 'bar' do
+  group 'bar'
   manage_home true
 end
 
 file '/home/bar/.git-credentials' do
   owner 'bar'
+  group 'bar'
 end
 
 file '/home/bar/.gitconfig' do
   owner 'bar'
+  group 'bar'
   content '[credential]
         helper = store --file /home/foo/.git-credentials'
 end
 
 git_credentials 'bar' do
+  group 'bar'
   action :delete
 end

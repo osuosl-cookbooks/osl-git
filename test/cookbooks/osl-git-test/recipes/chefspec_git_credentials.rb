@@ -21,11 +21,13 @@
 
 node.default['osl-git-test']['action'] = :create
 node.default['osl-git-test']['owner'] = 'root'
+node.default['osl-git-test']['group'] = 'root'
 node.default['osl-git-test']['secrets_item'] = 'item'
 node.default['osl-git-test']['use_http_path'] = true
 
 git_credentials node['osl-git-test']['owner'] do
   use_http_path node['osl-git-test']['use_http_path']
   secrets_item node['osl-git-test']['secrets_item']
+  group node['osl-git-test']['group']
   action node['osl-git-test']['action']
 end

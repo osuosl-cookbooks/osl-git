@@ -21,6 +21,7 @@ describe 'osl-git-test::chefspec_git_credentials' do
         expect(chef_run).to create_git_credentials('root').with(
           path: '/root/.git-credentials',
           owner: 'root',
+          group: 'root',
           secrets_databag: 'databag',
           secrets_item: 'item',
           use_http_path: true
@@ -30,14 +31,16 @@ describe 'osl-git-test::chefspec_git_credentials' do
         expect(chef_run).to set_git_config('credential.useHttpPath').with(
           value: 'true',
           scope: 'global',
-          user: 'root'
+          user: 'root',
+          group: 'root'
         )
       end
       it do
         expect(chef_run).to set_git_config('credential.helper').with(
           value: 'store --file /root/.git-credentials',
           scope: 'global',
-          user: 'root'
+          user: 'root',
+          group: 'root'
         )
       end
       it do
@@ -46,6 +49,7 @@ describe 'osl-git-test::chefspec_git_credentials' do
           source: 'git-credentials.erb',
           sensitive: true,
           owner: 'root',
+          group: 'root',
           variables: { credentials: %w(foo bar) }
         )
       end
@@ -62,6 +66,7 @@ describe 'osl-git-test::chefspec_git_credentials' do
           expect(chef_run).to create_git_credentials('root').with(
             path: '/root/.git-credentials',
             owner: 'root',
+            group: 'root',
             secrets_databag: 'databag',
             secrets_item: 'item',
             use_http_path: false
@@ -71,7 +76,8 @@ describe 'osl-git-test::chefspec_git_credentials' do
           expect(chef_run).to set_git_config('credential.useHttpPath').with(
             value: 'false',
             scope: 'global',
-            user: 'root'
+            user: 'root',
+            group: 'root'
           )
         end
       end
@@ -79,12 +85,14 @@ describe 'osl-git-test::chefspec_git_credentials' do
         cached(:chef_run) do
           ChefSpec::SoloRunner.new(p.merge(step_into: 'git_credentials')) do |node|
             node.normal['osl-git-test']['owner'] = 'foo'
+            node.normal['osl-git-test']['group'] = 'foo'
           end.converge(described_recipe)
         end
         it do
           expect(chef_run).to create_git_credentials('foo').with(
             path: '/home/foo/.git-credentials',
             owner: 'foo',
+            group: 'foo',
             secrets_databag: 'databag',
             secrets_item: 'item',
             use_http_path: true
@@ -94,14 +102,16 @@ describe 'osl-git-test::chefspec_git_credentials' do
           expect(chef_run).to set_git_config('credential.useHttpPath').with(
             value: 'true',
             scope: 'global',
-            user: 'foo'
+            user: 'foo',
+            group: 'foo'
           )
         end
         it do
           expect(chef_run).to set_git_config('credential.helper').with(
             value: 'store --file /home/foo/.git-credentials',
             scope: 'global',
-            user: 'foo'
+            user: 'foo',
+            group: 'foo'
           )
         end
         it do
@@ -110,6 +120,7 @@ describe 'osl-git-test::chefspec_git_credentials' do
             source: 'git-credentials.erb',
             sensitive: true,
             owner: 'foo',
+            group: 'foo',
             variables: { credentials: %w(foo bar) }
           )
         end
@@ -127,6 +138,7 @@ describe 'osl-git-test::chefspec_git_credentials' do
           expect(chef_run).to create_git_credentials('root').with(
             path: '/root/.git-credentials',
             owner: 'root',
+            group: 'root',
             secrets_databag: 'databag',
             secrets_item: 'item2',
             use_http_path: true
@@ -138,6 +150,8 @@ describe 'osl-git-test::chefspec_git_credentials' do
             source: 'git-credentials.erb',
             sensitive: true,
             owner: 'root',
+            group: 'root',
+            secrets_databag: 'databag',
             variables: { credentials: %w(hello world) }
           )
         end
@@ -155,6 +169,7 @@ describe 'osl-git-test::chefspec_git_credentials' do
           expect(chef_run).to delete_git_credentials('root').with(
             path: '/root/.git-credentials',
             owner: 'root',
+            group: 'root',
             secrets_databag: 'databag',
             secrets_item: 'item',
             use_http_path: true
@@ -163,6 +178,8 @@ describe 'osl-git-test::chefspec_git_credentials' do
         it do
           expect(chef_run).to run_execute('git config --global --unset-all credential.helper').with(
             user: 'root',
+            group: 'root',
+            secrets_databag: 'databag',
             environment: { 'HOME' => '/root' }
           )
         end
