@@ -22,7 +22,7 @@ describe file('/root/.gitconfig') do
 end
 
 describe ini('/root/.gitconfig') do
-  its('credential.helper') { should eq 'store --file /root/.git-credentials'}
+  its('credential.helper') { should eq 'store --file /root/.git-credentials' }
   its('credential.useHttpPath') { should eq 'true' }
 end
 
