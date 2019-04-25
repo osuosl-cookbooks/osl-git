@@ -1,4 +1,7 @@
 ---
+verifier:
+  name: inspec
+
 suites:
   - name: default
     run_list:
