@@ -151,7 +151,6 @@ describe 'osl-git-test::chefspec_git_credentials' do
             sensitive: true,
             owner: 'root',
             group: 'root',
-            secrets_databag: 'databag',
             variables: { credentials: %w(hello world) }
           )
         end
@@ -179,7 +178,6 @@ describe 'osl-git-test::chefspec_git_credentials' do
           expect(chef_run).to run_execute('git config --global --unset-all credential.helper').with(
             user: 'root',
             group: 'root',
-            secrets_databag: 'databag',
             environment: { 'HOME' => '/root' }
           )
         end
