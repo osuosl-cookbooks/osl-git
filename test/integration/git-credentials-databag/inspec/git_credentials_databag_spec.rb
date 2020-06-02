@@ -8,7 +8,7 @@ describe file '/root/.git-credentials' do
   its('mode') { should cmp '0600' }
   [
     %r{https://name:token@example.123/hello/world.git},
-    %r{bar:foo@example.xyz/foo/bar.git},
+    %r{https://bar:foo@example.xyz/foo/bar.git},
   ].each do |line|
     its('content') { should match line }
   end
