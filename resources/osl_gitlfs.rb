@@ -3,8 +3,8 @@ resource_name :osl_gitlfs
 default_action :sync
 
 provides :osl_gitlfs
+property :directory, String, required: true, name_property: true
 property :repository, String, required: true
-property :directory, String, required: true
 
 action :sync do
 
@@ -16,9 +16,10 @@ action :sync do
     environment ({"GIT_LFS_SKIP_SMUDGE" => "1"})
   end
 
-  bash 'lfs checkout repository' do
-    cwd "#{new_resource.directory}/#{new_resource.name}"
-    code "git lfs pull"
+  repo_folder = ::File.basename(new_resource.repository, ::File.extname(new_resource.repository))
+
+  execute 'git lfs pull' do
+    cwd "#{new_resource.directory}/#{repo_folder}"
   end
 
 end
