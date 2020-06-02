@@ -3,6 +3,10 @@ osl-git CHANGELOG
 This file is used to list changes made in each version of the
 osl-git cookbook.
 
+1.0.4 (2020-06-02)
+------------------
+- Remove comment from git credential template
+
 1.0.3 (2019-12-23)
 ------------------
 - Chef 14 post-migration fixes
