@@ -19,12 +19,7 @@
 # This recipe creates a git_credentials resource for testing in ChefSpec.
 # Attributes allow changing values for different test contexts.
 
-node.default['osl-git-test']['action'] = :sync
-node.default['osl-git-test']['directory'] = '/foo'
-node.default['osl-git-test']['repository'] = 'git@github.com:foo.git'
-node.default['osl-git-test']['repo_name'] = 'foo'
-
-osl_gitlfs node['osl-git-test']['repo_name'] do
-  directory node['osl-git-test']['directory']
-  repository node['osl-git-test']['repository']
+osl_gitlfs '/foo' do
+  destination '/foo'
+  repository 'https://git.osuosl.org/osuosl/test-lfs.git'
 end

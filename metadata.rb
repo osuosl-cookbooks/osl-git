@@ -9,7 +9,7 @@ description      'Installs/Configures osl-git'
 long_description 'Installs/Configures osl-git'
 version          '1.0.4'
 
-depends          'git'
 depends          'base'
+depends          'git'
 
 supports         'centos', '~> 7.0'
