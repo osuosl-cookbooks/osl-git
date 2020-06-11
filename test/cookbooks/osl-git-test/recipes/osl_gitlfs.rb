@@ -20,6 +20,5 @@
 # Attributes allow changing values for different test contexts.
 
 osl_gitlfs '/foo' do
-  destination '/foo'
   repository 'https://git.osuosl.org/osuosl/test-lfs.git'
 end
