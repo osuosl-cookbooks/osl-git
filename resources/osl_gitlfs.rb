@@ -7,7 +7,6 @@ property :destination, String, name_property: true
 property :repository, String
 
 action :sync do
-  run_context.include_recipe 'git'
   run_context.include_recipe 'osl-git'
 
   git new_resource.destination do
