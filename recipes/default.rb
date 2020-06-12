@@ -17,3 +17,4 @@
 # limitations under the License.
 
 include_recipe 'git'
+include_recipe 'base::gitlfs'
