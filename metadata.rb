@@ -7,7 +7,7 @@ issues_url       'https://github.com/osuosl-cookbooks/osl-git/issues'
 source_url       'https://github.com/osuosl-cookbooks/osl-git'
 description      'Installs/Configures osl-git'
 long_description 'Installs/Configures osl-git'
-version          '1.0.4'
+version          '1.1.0'
 
 depends          'base'
 depends          'git'

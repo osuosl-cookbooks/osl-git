@@ -3,6 +3,10 @@ osl-git CHANGELOG
 This file is used to list changes made in each version of the
 osl-git cookbook.
 
+1.1.0 (2020-06-15)
+------------------
+- osl_gitlfs custom resource
+
 1.0.4 (2020-06-02)
 ------------------
 - Remove comment from git credential template
