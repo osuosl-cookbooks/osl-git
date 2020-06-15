@@ -1,6 +1,6 @@
 #
-# Cookbook:: osl-git
-# Recipe:: default
+# Cookbook:: osl-git-test
+# Recipe:: chefspec_osl_gitlfs
 #
 # Copyright:: 2018, Oregon State University
 #
@@ -16,5 +16,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-include_recipe 'git'
-include_recipe 'base::gitlfs'
+# This recipe creates a git_credentials resource for testing in ChefSpec.
+# Attributes allow changing values for different test contexts.
+
+osl_gitlfs '/foo' do
+  repository 'https://git.osuosl.org/osuosl/test-lfs.git'
+end

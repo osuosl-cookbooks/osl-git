@@ -6,6 +6,9 @@ suites:
   - name: default
     run_list:
       - recipe[osl-git::default]
+  - name: osl-gitlfs
+    run_list:
+      - recipe[osl-git-test::osl_gitlfs]
   - name: git-credentials-databag
     run_list:
       - recipe[osl-git::default]
