@@ -5,7 +5,7 @@ property :owner, String, name_property: true
 property :group, String, default: 'root'
 property :secrets_databag, String, default: lazy { node['osl-git']['secrets_databag'] }
 property :secrets_item,    String, default: lazy { node['osl-git']['secrets_item'] }
-property :use_http_path, [TrueClass, FalseClass], default: true
+property :use_http_path, [true, false], default: true
 
 default_action :create
 
