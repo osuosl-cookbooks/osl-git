@@ -12,9 +12,11 @@ action :sync do
   git new_resource.destination do
     repository new_resource.repository
     environment('GIT_LFS_SKIP_SMUDGE' => '1')
+    notifies :run, "execute[git lfs pull #{new_resource.name}]", :immediately
   end
 
   execute "git lfs pull #{new_resource.name}" do
+    action :nothing
     command 'git lfs pull'
     cwd new_resource.destination
   end

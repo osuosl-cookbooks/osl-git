@@ -28,9 +28,7 @@ describe 'osl-git-test::osl_gitlfs' do
         )
       end
       it do
-        expect(chef_run).to run_execute('git lfs pull /foo').with(
-          cwd: '/foo'
-        )
+        expect(chef_run.git('/foo')).to notify('execute[git lfs pull /foo]').to(:run)
       end
     end
   end
