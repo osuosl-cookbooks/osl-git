@@ -3,6 +3,10 @@ osl-git CHANGELOG
 This file is used to list changes made in each version of the
 osl-git cookbook.
 
+1.2.1 (2020-07-07)
+------------------
+- Update osl_gitlfs to be idempotent
+
 1.2.0 (2020-07-01)
 ------------------
 - Chef 15 Fixes
