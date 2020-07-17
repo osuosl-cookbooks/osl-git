@@ -10,3 +10,4 @@ version          '0.1.0'
 depends          'osl-git'
 
 supports         'centos', '~> 7.0'
+supports         'centos', '~> 8.0'
