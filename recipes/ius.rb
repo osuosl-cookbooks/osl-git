@@ -19,6 +19,5 @@ include_recipe 'yum-ius'
 
 git_client 'ius git224' do
   package_name 'git224'
-  action :install
   only_if { platform_family?('rhel') && node['platform_version'].to_i == 7 } # IUS not available on C8
 end
