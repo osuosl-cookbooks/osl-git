@@ -37,6 +37,20 @@ describe 'osl-git::ius' do
           package_name: 'git224'
         )
       end
+
+      context 'custom package' do
+        cached(:chef_run) do
+          ChefSpec::SoloRunner.new(p) do |node|
+            node.normal['osl-git']['ius_git_package'] = 'git222'
+          end.converge(described_recipe)
+        end
+
+        it do
+          expect(chef_run).to install_git_client('ius git222').with(
+            package_name: 'git222'
+          )
+        end
+      end
     end
   end
 end
