@@ -11,6 +11,9 @@ suites:
   - name: default
     run_list:
       - recipe[osl-git::default]
+  - name: ius
+    run_list:
+      - recipe[osl-git::ius]
   - name: osl-gitlfs
     run_list:
       - recipe[osl-git-test::osl_gitlfs]

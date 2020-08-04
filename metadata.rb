@@ -10,5 +10,6 @@ version          '1.2.1'
 
 depends          'base'
 depends          'git'
+depends          'yum-ius', '~> 3.1.0'
 
 supports         'centos', '~> 7.0'
