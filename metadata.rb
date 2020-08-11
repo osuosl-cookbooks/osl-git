@@ -13,3 +13,4 @@ depends          'git'
 depends          'yum-ius', '~> 3.1.0'
 
 supports         'centos', '~> 7.0'
+supports         'centos', '~> 8.0'
