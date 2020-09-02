@@ -3,6 +3,10 @@ osl-git CHANGELOG
 This file is used to list changes made in each version of the
 osl-git cookbook.
 
+1.4.0 (2020-09-02)
+------------------
+- Chef 16 update
+
 1.3.1 (2020-08-11)
 ------------------
 - Centos 8 update
