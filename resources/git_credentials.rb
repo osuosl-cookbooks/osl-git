@@ -1,4 +1,5 @@
 resource_name :git_credentials
+provides :git_credentials
 
 property :path,  String, default: lazy { |r| Dir.home(r.owner) + '/.git-credentials' }
 property :owner, String, name_property: true
