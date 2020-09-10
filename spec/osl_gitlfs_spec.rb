@@ -12,7 +12,10 @@ describe 'osl-git-test::osl_gitlfs' do
       it do
         expect(chef_run).to sync_osl_gitlfs('/foo').with(
           destination: '/foo',
-          repository: 'https://git.osuosl.org/osuosl/test-lfs.git'
+          repository: 'https://git.osuosl.org/osuosl/test-lfs.git',
+          user: 'root',
+          group: 'root',
+          timeout: 300
         )
       end
       it do
