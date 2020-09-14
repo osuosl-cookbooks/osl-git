@@ -6,9 +6,9 @@ default_action :sync
 provides :osl_gitlfs
 property :destination, String, name_property: true
 property :repository, String
-property :user, [String, Integer]
-property :group, [String, Integer]
-property :timeout, Integer
+property :user, [String, Integer], default: 'root'
+property :group, [String, Integer], default: 'root'
+property :timeout, Integer, default: 500
 
 action :sync do
   run_context.include_recipe 'osl-git'

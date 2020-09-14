@@ -21,6 +21,10 @@
 
 osl_gitlfs '/foo' do
   repository 'https://git.osuosl.org/osuosl/test-lfs.git'
+end
+
+osl_gitlfs '/bar' do
+  repository 'https://git.osuosl.org/osuosl/test-lfs.git'
   user 'root'
   group 'root'
   timeout 300

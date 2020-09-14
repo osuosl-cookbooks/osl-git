@@ -15,6 +15,15 @@ describe 'osl-git-test::osl_gitlfs' do
           repository: 'https://git.osuosl.org/osuosl/test-lfs.git',
           user: 'root',
           group: 'root',
+          timeout: 500
+        )
+      end
+      it do
+        expect(chef_run).to sync_osl_gitlfs('/bar').with(
+          destination: '/bar',
+          repository: 'https://git.osuosl.org/osuosl/test-lfs.git',
+          user: 'root',
+          group: 'root',
           timeout: 300
         )
       end
@@ -31,11 +40,25 @@ describe 'osl-git-test::osl_gitlfs' do
         )
       end
       it do
+        expect(chef_run).to sync_git('/bar').with(
+          repository: 'https://git.osuosl.org/osuosl/test-lfs.git',
+          environment: { 'GIT_LFS_SKIP_SMUDGE' => '1' }
+        )
+      end
+      it do
         expect(chef_run.git('/foo')).to notify('execute[git lfs pull /foo]').to(:run)
+      end
+      it do
+        expect(chef_run.git('/bar')).to notify('execute[git lfs pull /bar]').to(:run)
       end
       it do
         expect(chef_run).to nothing_execute('git lfs pull /foo').with(
           cwd: '/foo'
+        )
+      end
+      it do
+        expect(chef_run).to nothing_execute('git lfs pull /bar').with(
+          cwd: '/bar'
         )
       end
     end

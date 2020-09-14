@@ -10,7 +10,16 @@ describe directory('/foo/.git') do
   it { should exist }
 end
 
+describe directory('/bar/.git') do
+  it { should exist }
+end
+
 describe file('/foo/osllogo.png') do
+  it { should exist }
+  its('size') { should eq 13011 }
+end
+
+describe file('/bar/osllogo.png') do
   it { should exist }
   its('size') { should eq 13011 }
 end
