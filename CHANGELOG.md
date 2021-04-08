@@ -3,6 +3,10 @@ osl-git CHANGELOG
 This file is used to list changes made in each version of the
 osl-git cookbook.
 
+1.6.0 (2021-04-08)
+------------------
+- Update Chef dependency to >= 16
+
 1.5.0 (2020-09-14)
 ------------------
 - Add user, group, and timeout properties to osl_gitlfs resource
