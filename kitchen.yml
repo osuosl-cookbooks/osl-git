@@ -6,6 +6,9 @@ verifier:
     enforce_idempotency: true
     multiple_converge: 2
     deprecations_as_errors: true
+    attributes:
+      osl-selinux:
+        enforcing: true
 
 suites:
   - name: default

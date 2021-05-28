@@ -8,6 +8,8 @@ property :secrets_databag, String, default: lazy { node['osl-git']['secrets_data
 property :secrets_item,    String, default: lazy { node['osl-git']['secrets_item'] }
 property :use_http_path, [true, false], default: true
 
+unified_mode true
+
 default_action :create
 
 action :create do

@@ -29,6 +29,10 @@ describe 'osl-git::ius' do
       end
 
       it do
+        expect(chef_run).to include_recipe('osl-selinux')
+      end
+
+      it do
         expect(chef_run).to include_recipe('yum-ius')
       end
 

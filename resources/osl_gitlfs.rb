@@ -10,6 +10,8 @@ property :user, [String, Integer], default: 'root'
 property :group, [String, Integer], default: 'root'
 property :timeout, Integer, default: 500
 
+unified_mode true
+
 action :sync do
   run_context.include_recipe 'osl-git'
 
