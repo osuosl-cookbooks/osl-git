@@ -1,5 +1,6 @@
 resource_name :osl_gitlfs
 provides :osl_gitlfs
+unified_mode true
 
 default_action :sync
 
