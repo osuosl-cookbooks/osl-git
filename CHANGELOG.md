@@ -3,6 +3,10 @@ osl-git CHANGELOG
 This file is used to list changes made in each version of the
 osl-git cookbook.
 
+1.7.0 (2021-06-11)
+------------------
+- Chef 17 Fixes
+
 1.6.0 (2021-04-08)
 ------------------
 - Update Chef dependency to >= 16
