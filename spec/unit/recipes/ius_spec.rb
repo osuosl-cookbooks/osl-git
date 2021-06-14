@@ -24,35 +24,42 @@ describe 'osl-git::ius' do
       cached(:chef_run) do
         ChefSpec::SoloRunner.new(p).converge(described_recipe)
       end
-      it 'converges successfully' do
-        expect { chef_run }.to_not raise_error
-      end
-
-      it do
-        expect(chef_run).to include_recipe('osl-selinux')
-      end
-
-      it do
-        expect(chef_run).to include_recipe('yum-ius')
-      end
-
-      it do
-        expect(chef_run).to install_git_client('ius git224').with(
-          package_name: 'git224'
-        )
-      end
-
-      context 'custom package' do
-        cached(:chef_run) do
-          ChefSpec::SoloRunner.new(p) do |node|
-            node.normal['osl-git']['ius_git_package'] = 'git222'
-          end.converge(described_recipe)
+      case p
+      when CENTOS_7
+        it 'converges successfully' do
+          expect { chef_run }.to_not raise_error
         end
 
         it do
-          expect(chef_run).to install_git_client('ius git222').with(
-            package_name: 'git222'
+          expect(chef_run).to include_recipe('yum-ius')
+        end
+
+        it do
+          expect(chef_run).to include_recipe('osl-selinux')
+        end
+
+        it do
+          expect(chef_run).to install_git_client('ius git224').with(
+            package_name: 'git224'
           )
+        end
+
+        context 'custom package' do
+          cached(:chef_run) do
+            ChefSpec::SoloRunner.new(p) do |node|
+              node.normal['osl-git']['ius_git_package'] = 'git222'
+            end.converge(described_recipe)
+          end
+
+          it do
+            expect(chef_run).to install_git_client('ius git222').with(
+              package_name: 'git222'
+            )
+          end
+        end
+      when CENTOS_8
+        it do
+          expect { chef_run }.to raise_error('IUS is only supported on CentOS 7')
         end
       end
     end
