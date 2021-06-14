@@ -35,6 +35,10 @@ describe 'osl-git::ius' do
         end
 
         it do
+          expect(chef_run).to include_recipe('osl-selinux')
+        end
+
+        it do
           expect(chef_run).to install_git_client('ius git224').with(
             package_name: 'git224'
           )
