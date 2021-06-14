@@ -3,6 +3,10 @@ osl-git CHANGELOG
 This file is used to list changes made in each version of the
 osl-git cookbook.
 
+1.8.0 (2021-06-14)
+------------------
+- Enable Selinux Enforcing
+
 1.7.0 (2021-06-11)
 ------------------
 - Chef 17 Fixes
