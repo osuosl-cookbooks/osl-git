@@ -10,6 +10,9 @@ describe 'osl-git::default' do
         expect { chef_run }.to_not raise_error
       end
       it do
+        expect(chef_run).to include_recipe 'osl-selinux'
+      end
+      it do
         expect(chef_run).to include_recipe 'git'
       end
     end

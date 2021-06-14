@@ -17,6 +17,7 @@
 # limitations under the License.
 raise 'IUS is only supported on CentOS 7' if platform_family?('rhel') && node['platform_version'].to_i >= 8
 
+include_recipe 'osl-selinux'
 include_recipe 'yum-ius'
 
 git_client "ius #{node['osl-git']['ius_git_package']}" do
