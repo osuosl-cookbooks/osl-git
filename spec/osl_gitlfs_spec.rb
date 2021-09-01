@@ -53,11 +53,17 @@ describe 'osl-git-test::osl_gitlfs' do
       end
       it do
         expect(chef_run).to nothing_execute('git lfs pull /foo').with(
+          user: 'root',
+          group: 'root',
+          login: true,
           cwd: '/foo'
         )
       end
       it do
         expect(chef_run).to nothing_execute('git lfs pull /bar').with(
+          user: 'root',
+          group: 'root',
+          login: true,
           cwd: '/bar'
         )
       end

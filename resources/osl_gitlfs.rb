@@ -25,6 +25,9 @@ action :sync do
 
   execute "git lfs pull #{new_resource.name}" do
     action :nothing
+    user new_resource.user
+    group new_resource.group
+    login true if respond_to?(:login) # TODO: Remove after we upgrade to Chef 17
     command 'git lfs pull'
     cwd new_resource.destination
   end
