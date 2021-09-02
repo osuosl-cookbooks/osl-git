@@ -3,6 +3,10 @@ osl-git CHANGELOG
 This file is used to list changes made in each version of the
 osl-git cookbook.
 
+1.9.0 (2021-09-02)
+------------------
+- Run git lfs pull command as specified user
+
 1.8.0 (2021-06-14)
 ------------------
 - Enable Selinux Enforcing
