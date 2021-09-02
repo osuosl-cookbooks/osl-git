@@ -19,11 +19,11 @@ describe 'osl-git-test::osl_gitlfs' do
         )
       end
       it do
-        expect(chef_run).to sync_osl_gitlfs('/bar').with(
-          destination: '/bar',
+        expect(chef_run).to sync_osl_gitlfs('/tmp/bar').with(
+          destination: '/tmp/bar',
           repository: 'https://git.osuosl.org/osuosl/test-lfs.git',
-          user: 'root',
-          group: 'root',
+          user: 'nobody',
+          group: 'nobody',
           timeout: 300
         )
       end
@@ -40,7 +40,9 @@ describe 'osl-git-test::osl_gitlfs' do
         )
       end
       it do
-        expect(chef_run).to sync_git('/bar').with(
+        expect(chef_run).to sync_git('/tmp/bar').with(
+          user: 'nobody',
+          group: 'nobody',
           repository: 'https://git.osuosl.org/osuosl/test-lfs.git',
           environment: { 'GIT_LFS_SKIP_SMUDGE' => '1' }
         )
@@ -49,16 +51,22 @@ describe 'osl-git-test::osl_gitlfs' do
         expect(chef_run.git('/foo')).to notify('execute[git lfs pull /foo]').to(:run)
       end
       it do
-        expect(chef_run.git('/bar')).to notify('execute[git lfs pull /bar]').to(:run)
+        expect(chef_run.git('/tmp/bar')).to notify('execute[git lfs pull /tmp/bar]').to(:run)
       end
       it do
         expect(chef_run).to nothing_execute('git lfs pull /foo').with(
+          user: 'root',
+          group: 'root',
+          login: true,
           cwd: '/foo'
         )
       end
       it do
-        expect(chef_run).to nothing_execute('git lfs pull /bar').with(
-          cwd: '/bar'
+        expect(chef_run).to nothing_execute('git lfs pull /tmp/bar').with(
+          user: 'nobody',
+          group: 'nobody',
+          login: true,
+          cwd: '/tmp/bar'
         )
       end
     end
