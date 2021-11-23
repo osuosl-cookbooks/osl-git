@@ -16,6 +16,13 @@ describe directory('/tmp/bar/.git') do
   its('group') { should eq 'nobody' }
 end
 
+describe file('/tmp/bar/.git/hooks/pre-push') do
+  it { should be_executable }
+  its('owner') { should eq 'nobody' }
+  its('group') { should eq 'nobody' }
+  its('content') { should match /git-lfs/ }
+end
+
 describe file('/foo/osllogo.png') do
   it { should exist }
   its('size') { should eq 13011 }
