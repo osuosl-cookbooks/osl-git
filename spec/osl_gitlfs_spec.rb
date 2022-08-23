@@ -28,10 +28,7 @@ describe 'osl-git-test::osl_gitlfs' do
         )
       end
       it do
-        expect(chef_run).to include_recipe('base::gitlfs')
-      end
-      it do
-        expect(chef_run).to include_recipe('git')
+        expect(chef_run).to include_recipe('osl-git')
       end
       it do
         expect(chef_run).to sync_git('/foo').with(
