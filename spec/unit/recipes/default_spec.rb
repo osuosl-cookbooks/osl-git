@@ -15,6 +15,9 @@ describe 'osl-git::default' do
       it do
         expect(chef_run).to include_recipe 'git'
       end
+      it do
+        expect(chef_run).to include_recipe 'osl-git::gitlfs'
+      end
     end
   end
 end

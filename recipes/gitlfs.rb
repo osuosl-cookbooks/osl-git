@@ -1,8 +1,8 @@
 #
 # Cookbook:: osl-git
-# Recipe:: default
+# Recipe:: gitlfs
 #
-# Copyright:: 2018-2022, Oregon State University
+# Copyright:: 2022, Oregon State University
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+osl_packagecloud_repo 'github/git-lfs' do
+  only_if { %w(x86_64).include?(node['kernel']['machine']) }
+end
 
-include_recipe 'osl-selinux'
-include_recipe 'git'
-include_recipe 'osl-git::gitlfs'
+yum_repository 'git-lfs' do
+  description "OSL git-lfs #{node['kernel']['machine']} repo"
+  gpgkey 'http://ftp.osuosl.org/pub/osl/repos/yum/RPM-GPG-KEY-osuosl'
+  gpgcheck true
+  baseurl 'http://ftp.osuosl.org/pub/osl/repos/yum/$releasever/git-lfs/$basearch'
+  only_if { %w(ppc64le s390x aarch64).include?(node['kernel']['machine']) }
+end
+
+package 'git-lfs'
