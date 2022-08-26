@@ -3,6 +3,10 @@ osl-git CHANGELOG
 This file is used to list changes made in each version of the
 osl-git cookbook.
 
+1.10.0 (2022-08-26)
+-------------------
+- Migrate base::gitlfs to this cookbook
+
 1.9.1 (2021-11-23)
 ------------------
 - Ensure git lfs is properly installed in a repo
