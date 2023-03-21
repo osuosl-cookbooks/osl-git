@@ -13,5 +13,6 @@ depends          'osl-resources'
 depends          'osl-selinux'
 depends          'yum-ius', '~> 3.1.0'
 
+supports         'almalinux', '~> 8.0'
 supports         'centos', '~> 7.0'
 supports         'centos_stream', '~> 8.0'

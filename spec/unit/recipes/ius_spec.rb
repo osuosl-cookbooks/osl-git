@@ -2,7 +2,7 @@
 # Cookbook:: osl-git
 # Spec:: ius
 #
-# Copyright:: 2020-2022, Oregon State University
+# Copyright:: 2020-2023, Oregon State University
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -57,7 +57,7 @@ describe 'osl-git::ius' do
             )
           end
         end
-      when CENTOS_8
+      when ALMA_8, CENTOS_8
         it do
           expect { chef_run }.to raise_error('IUS is only supported on CentOS 7')
         end
