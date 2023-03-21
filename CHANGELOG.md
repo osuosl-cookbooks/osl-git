@@ -3,6 +3,10 @@ osl-git CHANGELOG
 This file is used to list changes made in each version of the
 osl-git cookbook.
 
+1.10.1 (2023-03-21)
+-------------------
+- Add AlmaLinux 8 support
+
 1.10.0 (2022-08-26)
 -------------------
 - Migrate base::gitlfs to this cookbook
