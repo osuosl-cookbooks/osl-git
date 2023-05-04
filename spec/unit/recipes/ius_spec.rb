@@ -57,7 +57,7 @@ describe 'osl-git::ius' do
             )
           end
         end
-      when ALMA_8, CENTOS_8
+      when ALMA_8
         it do
           expect { chef_run }.to raise_error('IUS is only supported on CentOS 7')
         end

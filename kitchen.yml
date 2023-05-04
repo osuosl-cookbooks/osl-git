@@ -17,8 +17,6 @@ suites:
   - name: ius
     run_list:
       - recipe[osl-git::ius]
-    excludes:
-      - centos_stream-8
   - name: gitlfs
     run_list:
       - recipe[osl-git::gitlfs]
