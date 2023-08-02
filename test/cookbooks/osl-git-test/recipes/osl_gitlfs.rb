@@ -20,7 +20,7 @@
 # Attributes allow changing values for different test contexts.
 pseudoGroup = 'nobody'
 if platform_family?('debian')
-  pseudoGroup = 'nogroup' 
+  pseudoGroup = 'nogroup'
 
   directory '/tmp/bar' do
     owner 'nobody'
