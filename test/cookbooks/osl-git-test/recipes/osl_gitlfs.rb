@@ -18,7 +18,7 @@
 
 # This recipe creates a git_credentials resource for testing in ChefSpec.
 # Attributes allow changing values for different test contexts.
-pseudoGroup = 'nobody'
+nogroup = platform_family?('debian') ? 'nogroup' : 'nogroup'
 if platform_family?('debian')
   pseudoGroup = 'nogroup'
 
