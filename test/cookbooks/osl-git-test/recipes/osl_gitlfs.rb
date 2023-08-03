@@ -36,6 +36,6 @@ end
 osl_gitlfs '/tmp/bar' do
   repository 'https://git.osuosl.org/osuosl/test-lfs.git'
   user 'nobody'
-  group pseudoGroup
+  group nogroup
   timeout 300
 end
