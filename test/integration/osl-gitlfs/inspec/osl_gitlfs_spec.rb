@@ -1,4 +1,4 @@
-nogroup = platform_family?('debian') ? 'nogroup' : 'nobody'
+nogroup = os.family == 'debian' ? 'nogroup' : 'nobody'
 
 describe package 'git' do
   it { should be_installed }
@@ -33,6 +33,6 @@ end
 describe file('/tmp/bar/osllogo.png') do
   it { should exist }
   its('owner') { should eq 'nobody' }
-  its('group') { should eq pseudoGroup }
+  its('group') { should eq nogroup }
   its('size') { should eq 13011 }
 end
