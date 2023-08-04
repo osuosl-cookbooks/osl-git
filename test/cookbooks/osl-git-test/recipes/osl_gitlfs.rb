@@ -18,16 +18,7 @@
 
 # This recipe creates a git_credentials resource for testing in ChefSpec.
 # Attributes allow changing values for different test contexts.
-nogroup = platform_family?('debian') ? 'nogroup' : 'nogroup'
-if platform_family?('debian')
-  pseudoGroup = 'nogroup'
-
-  directory '/tmp/bar' do
-    owner 'nobody'
-    group 'nogroup'
-    mode '0755'
-  end
-end
+nogroup = platform_family?('debian') ? 'nogroup' : 'nobody'
 
 osl_gitlfs '/foo' do
   repository 'https://git.osuosl.org/osuosl/test-lfs.git'
