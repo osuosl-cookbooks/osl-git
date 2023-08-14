@@ -2,7 +2,7 @@ describe package('git') do
   it { should_not be_installed }
 end
 
-describe package('git224') do
+describe package('git226') do
   it { should be_installed }
 end
 

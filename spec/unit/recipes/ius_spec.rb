@@ -40,7 +40,7 @@ describe 'osl-git::ius' do
 
         it do
           expect(chef_run).to install_git_client('ius git224').with(
-            package_name: 'git224'
+            package_name: 'git226'
           )
         end
 
