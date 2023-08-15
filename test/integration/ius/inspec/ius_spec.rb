@@ -7,5 +7,5 @@ describe package('git236') do
 end
 
 describe command('git --version') do
-  its('stdout') { should match /git version 2.24/ }
+  its('stdout') { should match /git version 2.36.6/ }
 end
