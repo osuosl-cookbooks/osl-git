@@ -9,6 +9,7 @@ describe 'osl-git-test::osl_gitlfs' do
       it 'converges successfully' do
         expect { chef_run }.to_not raise_error
       end
+      nogroup = p == DEBIAN_12 ? 'nogroup' : 'nobody'
       it do
         expect(chef_run).to sync_osl_gitlfs('/foo').with(
           destination: '/foo',
@@ -23,7 +24,7 @@ describe 'osl-git-test::osl_gitlfs' do
           destination: '/tmp/bar',
           repository: 'https://git.osuosl.org/osuosl/test-lfs.git',
           user: 'nobody',
-          group: 'nobody',
+          group: nogroup,
           timeout: 300
         )
       end
@@ -39,7 +40,7 @@ describe 'osl-git-test::osl_gitlfs' do
       it do
         expect(chef_run).to sync_git('/tmp/bar').with(
           user: 'nobody',
-          group: 'nobody',
+          group: nogroup,
           repository: 'https://git.osuosl.org/osuosl/test-lfs.git',
           environment: { 'GIT_LFS_SKIP_SMUDGE' => '1' }
         )
@@ -62,7 +63,7 @@ describe 'osl-git-test::osl_gitlfs' do
       it do
         expect(chef_run).to run_execute('git lfs install /tmp/bar').with(
           user: 'nobody',
-          group: 'nobody',
+          group: nogroup,
           login: true,
           cwd: '/tmp/bar',
           command: 'git lfs install'
@@ -94,7 +95,7 @@ describe 'osl-git-test::osl_gitlfs' do
         it do
           expect(chef_run).to_not run_execute('git lfs install /tmp/bar').with(
             user: 'nobody',
-            group: 'nobody',
+            group: nogroup,
             login: true,
             cwd: '/tmp/bar',
             command: 'git lfs install'
@@ -113,7 +114,7 @@ describe 'osl-git-test::osl_gitlfs' do
       it do
         expect(chef_run).to nothing_execute('git lfs pull /tmp/bar').with(
           user: 'nobody',
-          group: 'nobody',
+          group: nogroup,
           login: true,
           cwd: '/tmp/bar',
           command: 'git lfs pull'

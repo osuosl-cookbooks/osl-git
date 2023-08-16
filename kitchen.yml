@@ -19,6 +19,7 @@ suites:
       - recipe[osl-git::ius]
     excludes:
       - almalinux-8
+      - debian-12
   - name: gitlfs
     run_list:
       - recipe[osl-git::gitlfs]
