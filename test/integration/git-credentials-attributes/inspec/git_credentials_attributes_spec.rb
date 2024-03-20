@@ -51,7 +51,7 @@ end
 
 describe ini '/home/foo/.gitconfig' do
   its('credential.helper') { should eq 'store --file /home/foo/.git-credentials' }
-  its('credential.useHttpPath') { should eq 'false' }
+  its('credential.useHttpPath') { should eq 'true' }
 end
 
 describe file '/home/bar/.git-credentials' do
@@ -59,12 +59,5 @@ describe file '/home/bar/.git-credentials' do
 end
 
 describe file '/home/bar/.gitconfig' do
-  it { should be_file }
-  its('owner') { should eq 'bar' }
-  its('group') { should eq 'bar' }
-end
-
-describe ini '/home/bar/.gitconfig' do
-  its('credential.helper') { should eq nil }
-  its('credential.useHttpPath') { should nil }
+  it { should_not exist }
 end

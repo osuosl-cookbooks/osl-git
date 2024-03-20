@@ -43,19 +43,27 @@ describe 'osl-git-test::chefspec_git_credentials' do
           group: 'root'
         )
       end
+
       it do
-        expect(chef_run).to create_template('/root/.git-credentials').with(
-          cookbook: 'osl-git',
-          source: 'git-credentials.erb',
+        expect(chef_run).to edit_append_if_no_line('add credential for root for 2c26b46b6').with(
           sensitive: true,
           owner: 'root',
           group: 'root',
-          variables: { credentials: %w(foo bar) }
+          mode: '0600',
+          line: 'foo'
         )
       end
+
       it do
-        expect(chef_run).to render_file('/root/.git-credentials').with_content(/^foo$\n^bar$/)
+        expect(chef_run).to edit_append_if_no_line('add credential for root for fcde2b2ed').with(
+          sensitive: true,
+          owner: 'root',
+          group: 'root',
+          mode: '0600',
+          line: 'bar'
+        )
       end
+
       context 'useHttpPath disabled' do
         cached(:chef_run) do
           ChefSpec::SoloRunner.new(p.merge(step_into: 'git_credentials')) do |node|
@@ -115,17 +123,23 @@ describe 'osl-git-test::chefspec_git_credentials' do
           )
         end
         it do
-          expect(chef_run).to create_template('/home/foo/.git-credentials').with(
-            cookbook: 'osl-git',
-            source: 'git-credentials.erb',
+          expect(chef_run).to edit_append_if_no_line('add credential for foo for 2c26b46b6').with(
             sensitive: true,
             owner: 'foo',
             group: 'foo',
-            variables: { credentials: %w(foo bar) }
+            mode: '0600',
+            line: 'foo'
           )
         end
+
         it do
-          expect(chef_run).to render_file('/home/foo/.git-credentials').with_content(/^foo$\n^bar$/)
+          expect(chef_run).to edit_append_if_no_line('add credential for foo for fcde2b2ed').with(
+            sensitive: true,
+            owner: 'foo',
+            group: 'foo',
+            mode: '0600',
+            line: 'bar'
+          )
         end
       end
       context 'different databag item' do
@@ -145,17 +159,23 @@ describe 'osl-git-test::chefspec_git_credentials' do
           )
         end
         it do
-          expect(chef_run).to create_template('/root/.git-credentials').with(
-            cookbook: 'osl-git',
-            source: 'git-credentials.erb',
+          expect(chef_run).to edit_append_if_no_line('add credential for root for 2cf24dba5').with(
             sensitive: true,
             owner: 'root',
             group: 'root',
-            variables: { credentials: %w(hello world) }
+            mode: '0600',
+            line: 'hello'
           )
         end
+
         it do
-          expect(chef_run).to render_file('/root/.git-credentials').with_content(/^hello$\n^world$/)
+          expect(chef_run).to edit_append_if_no_line('add credential for root for 486ea4622').with(
+            sensitive: true,
+            owner: 'root',
+            group: 'root',
+            mode: '0600',
+            line: 'world'
+          )
         end
       end
       context 'delete action' do
@@ -163,6 +183,10 @@ describe 'osl-git-test::chefspec_git_credentials' do
           ChefSpec::SoloRunner.new(p.merge(step_into: 'git_credentials')) do |node|
             node.normal['osl-git-test']['action'] = :delete
           end.converge(described_recipe)
+        end
+        before do
+          allow(File).to receive(:exist?).and_call_original
+          allow(File).to receive(:exist?).with('/root/.git-credentials').and_return(true)
         end
         it do
           expect(chef_run).to delete_git_credentials('root').with(

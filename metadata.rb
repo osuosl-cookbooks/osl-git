@@ -9,6 +9,7 @@ description      'Installs/Configures osl-git'
 version          '1.10.2'
 
 depends          'git'
+depends          'line'
 depends          'osl-resources'
 depends          'osl-selinux'
 depends          'yum-ius', '~> 3.1.0'

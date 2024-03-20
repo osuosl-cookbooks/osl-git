@@ -9,6 +9,8 @@ describe file '/root/.git-credentials' do
   [
     %r{https://name:token@example.123/hello/world.git},
     %r{https://bar:foo@example.xyz/foo/bar.git},
+    %r{https://username:secret@example\.789},
+    %r{https://gitlab%2bdeploy-token-13:CWN8Fsjrtare7yAHkknj@git\.osuosl\.org/osuosl/test\.git},
   ].each do |line|
     its('content') { should match line }
   end
@@ -55,11 +57,5 @@ describe file '/home/bar/.git-credentials' do
 end
 
 describe file '/home/bar/.gitconfig' do
-  it { should be_file }
-  it { should be_owned_by 'bar' }
-end
-
-describe ini('/home/bar/.gitconfig') do
-  its('credential.helper') { should eq nil }
-  its('credential.useHttpPath') { should eq nil }
+  it { should_not exist }
 end

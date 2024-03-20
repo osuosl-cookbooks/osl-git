@@ -1,14 +1,15 @@
 ---
 verifier:
   name: inspec
-  provisioner:
-    name: chef_infra
-    enforce_idempotency: true
-    multiple_converge: 2
-    deprecations_as_errors: true
-    attributes:
-      osl-selinux:
-        enforcing: true
+
+provisioner:
+  name: chef_infra
+  enforce_idempotency: true
+  multiple_converge: 2
+  deprecations_as_errors: true
+  attributes:
+    osl-selinux:
+      enforcing: true
 
 suites:
   - name: default

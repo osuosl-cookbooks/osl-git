@@ -2,7 +2,7 @@
 # Cookbook:: osl-git-test
 # Recipe:: databag
 #
-# Copyright:: 2018-2023, Oregon State University
+# Copyright:: 2018-2024, Oregon State University
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,6 +23,11 @@ node.default['osl-git']['secrets_item']    = 'item1'
 
 # Testing default properties
 git_credentials 'root'
+
+git_credentials 'root-additional' do
+  owner 'root'
+  secrets_item 'item3'
+end
 
 git '/root/test' do
   user 'root'
@@ -55,18 +60,6 @@ group 'bar'
 user 'bar' do
   group 'bar'
   manage_home true
-end
-
-file '/home/bar/.git-credentials' do
-  owner 'bar'
-  group 'bar'
-end
-
-file '/home/bar/.gitconfig' do
-  owner 'bar'
-  group 'bar'
-  content '[credential]
-        helper = store --file /home/foo/.git-credentials'
 end
 
 git_credentials 'bar' do
