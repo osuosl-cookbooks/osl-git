@@ -2,7 +2,7 @@
 # Cookbook:: osl-git-test
 # Recipe:: attributes
 #
-# Copyright:: 2018-2023, Oregon State University
+# Copyright:: 2018-2024, Oregon State University
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -36,7 +36,6 @@ end
 
 git_credentials 'foo' do
   group 'foo'
-  use_http_path false
 end
 
 git '/home/foo/test' do
@@ -51,18 +50,6 @@ group 'bar'
 user 'bar' do
   group 'bar'
   manage_home true
-end
-
-file '/home/bar/.git-credentials' do
-  owner 'bar'
-  group 'bar'
-end
-
-file '/home/bar/.gitconfig' do
-  owner 'bar'
-  group 'bar'
-  content '[credential]
-        helper = store --file /home/foo/.git-credentials'
 end
 
 git_credentials 'bar' do

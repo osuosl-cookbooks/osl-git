@@ -1,0 +1,6 @@
+{
+  "id": "item3",
+  "credentials": [
+    "https://username:secret@example.789"
+  ]
+}

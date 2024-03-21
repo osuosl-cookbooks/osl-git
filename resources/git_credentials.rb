@@ -26,17 +26,17 @@ action :create do
     group new_resource.group
   end
 
-  template new_resource.path do
-    cookbook 'osl-git'
-    source 'git-credentials.erb'
-    sensitive true
-    owner new_resource.owner
-    group new_resource.group
+  secrets = git_credential_secrets(new_resource.secrets_databag, new_resource.secrets_item)
 
-    secrets = git_credential_secrets(new_resource.secrets_databag, new_resource.secrets_item)
-    variables(credentials: secrets['credentials']) unless secrets['credentials'].empty?
-
-    action :create
+  secrets['credentials'].each do |cred|
+    append_if_no_line "add credential for #{new_resource.owner} for #{Digest::SHA256.hexdigest(cred)[0..8]}" do
+      path new_resource.path
+      mode '0600'
+      owner new_resource.owner
+      group new_resource.group
+      sensitive true
+      line cred.gsub(/\+/, '%2b')
+    end
   end
 end
 
@@ -45,9 +45,11 @@ action :delete do
     user new_resource.owner
     group new_resource.group
     environment 'HOME' => Dir.home(new_resource.owner)
+    only_if { ::File.exist?(new_resource.path) }
   end
 
   file new_resource.path do
+    sensitive true
     action :delete
   end
 end
