@@ -34,6 +34,7 @@ describe 'osl-git-test::osl_gitlfs' do
       it do
         expect(chef_run).to sync_git('/foo').with(
           repository: 'https://git.osuosl.org/osuosl/test-lfs.git',
+          revision: 'HEAD',
           environment: { 'GIT_LFS_SKIP_SMUDGE' => '1' }
         )
       end

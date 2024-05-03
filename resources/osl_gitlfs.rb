@@ -7,6 +7,7 @@ default_action :sync
 provides :osl_gitlfs
 property :destination, String, name_property: true
 property :repository, String
+property :revision, String, default: 'HEAD'
 property :user, [String, Integer], default: 'root'
 property :group, [String, Integer], default: 'root'
 property :timeout, Integer, default: 500
@@ -16,6 +17,7 @@ action :sync do
 
   git new_resource.destination do
     repository new_resource.repository
+    revision new_resource.revision
     environment('GIT_LFS_SKIP_SMUDGE' => '1')
     notifies :run, "execute[git lfs pull #{new_resource.name}]", :immediately
     user new_resource.user
