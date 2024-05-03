@@ -3,6 +3,10 @@ osl-git CHANGELOG
 This file is used to list changes made in each version of the
 osl-git cookbook.
 
+1.12.0 (2024-05-03)
+-------------------
+- Add revision property to osl_gitlfs
+
 1.11.0 (2024-03-21)
 -------------------
 - Fix idempotency issues with git_credentials resource
