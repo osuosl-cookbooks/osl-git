@@ -3,6 +3,10 @@ osl-git CHANGELOG
 This file is used to list changes made in each version of the
 osl-git cookbook.
 
+1.12.1 (2024-06-13)
+-------------------
+- Added almalinux 9
+
 1.12.0 (2024-05-03)
 -------------------
 - Add revision property to osl_gitlfs
