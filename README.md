@@ -13,7 +13,8 @@ Requirements
 - [git](https://supermarket.chef.io/cookbooks/git)
 
 #### Platforms
-- CentOS 7
+- AlmaLinux 8, 9
+- Debian 12
 
 Attributes
 ----------
