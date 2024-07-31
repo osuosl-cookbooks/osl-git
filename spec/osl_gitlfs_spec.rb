@@ -9,7 +9,13 @@ describe 'osl-git-test::osl_gitlfs' do
       it 'converges successfully' do
         expect { chef_run }.to_not raise_error
       end
-      nogroup = p == DEBIAN_12 ? 'nogroup' : 'nobody'
+      nogroup =
+        case p
+        when *ALL_DEBIAN
+          'nogroup'
+        else
+          'nobody'
+        end
       it do
         expect(chef_run).to sync_osl_gitlfs('/foo').with(
           destination: '/foo',
