@@ -17,6 +17,10 @@
 # limitations under the License.
 osl_packagecloud_repo 'github/git-lfs' do
   only_if { %w(x86_64).include?(node['kernel']['machine']) }
+  # This is now included in the appstream repo
+  if node['platform_version'].to_i >= 9
+    action :remove
+  end
 end
 
 yum_repository 'git-lfs' do
@@ -25,6 +29,10 @@ yum_repository 'git-lfs' do
   gpgcheck true
   baseurl 'http://ftp.osuosl.org/pub/osl/repos/yum/$releasever/git-lfs/$basearch'
   only_if { %w(ppc64le s390x aarch64).include?(node['kernel']['machine']) }
+  # This is now included in the appstream repo
+  if node['platform_version'].to_i >= 9
+    action :remove
+  end
 end
 
 package 'git-lfs'
