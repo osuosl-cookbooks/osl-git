@@ -3,6 +3,10 @@ osl-git CHANGELOG
 This file is used to list changes made in each version of the
 osl-git cookbook.
 
+1.13.3 (2025-08-08)
+-------------------
+- Add support for AlmaLinux 10
+
 1.13.2 (2024-11-22)
 -------------------
 - Remove repos for git-lfs on AlmaLinux 9 and above
