@@ -3,6 +3,10 @@ osl-git CHANGELOG
 This file is used to list changes made in each version of the
 osl-git cookbook.
 
+1.13.4 (2026-01-08)
+-------------------
+- Debian 13 Integration
+
 1.13.3 (2025-08-08)
 -------------------
 - Add support for AlmaLinux 10
