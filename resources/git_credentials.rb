@@ -35,7 +35,7 @@ action :create do
       owner new_resource.owner
       group new_resource.group
       sensitive true
-      line cred.gsub(/\+/, '%2b')
+      line cred.gsub('+', '%2b')
     end
   end
 end

@@ -6,7 +6,7 @@ module OslGit
           databag,
           item
         )
-      rescue Net::HTTPServerException => e
+      rescue Net::HTTPClientException => e
         databag_item = "#{databag}:#{item}"
         if e.response.code == '404'
           Chef::Log.warn("Could not find databag '#{databag_item}'; falling back to default attributes.")
