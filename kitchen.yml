@@ -3,7 +3,8 @@ verifier:
   name: inspec
 
 provisioner:
-  name: chef_infra
+  name: cinc_infra
+  product_version: 18
   enforce_idempotency: true
   multiple_converge: 2
   deprecations_as_errors: true
