@@ -6,7 +6,7 @@ chef_version     '>= 16.0'
 issues_url       'https://github.com/osuosl-cookbooks/osl-git/issues'
 source_url       'https://github.com/osuosl-cookbooks/osl-git'
 description      'Installs/Configures osl-git'
-version          '1.13.4'
+version          '1.13.5'
 
 depends          'git', '~> 12.0'
 depends          'line'

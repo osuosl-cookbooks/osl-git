@@ -3,6 +3,10 @@ osl-git CHANGELOG
 This file is used to list changes made in each version of the
 osl-git cookbook.
 
+1.13.5 (2026-05-11)
+-------------------
+- Pin git cookbook to 12.x and switch to cinc_infra
+
 1.13.4 (2026-01-08)
 -------------------
 - Debian 13 Integration
