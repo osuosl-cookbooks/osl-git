@@ -17,5 +17,9 @@
 # limitations under the License.
 
 include_recipe 'osl-selinux'
-include_recipe 'git'
+
+apt_update 'osl-git' if platform_family?('debian')
+
+git_client 'default'
+
 include_recipe 'osl-git::gitlfs'

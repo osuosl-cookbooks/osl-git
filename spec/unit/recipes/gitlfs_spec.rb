@@ -34,6 +34,13 @@ describe 'osl-git::gitlfs' do
         it { is_expected.to remove_osl_packagecloud_repo('github/git-lfs') }
       end
       it { is_expected.to_not create_yum_repository('git-lfs') }
+      it do
+        if ALL_DEBIAN.include?(p)
+          is_expected.to periodic_apt_update('osl-git-lfs')
+        else
+          is_expected.to_not periodic_apt_update('osl-git-lfs')
+        end
+      end
       it { is_expected.to install_package('git-lfs') }
       context 'setting arch to aarch64' do
         cached(:chef_run) do
