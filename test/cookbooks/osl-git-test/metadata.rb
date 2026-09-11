@@ -7,4 +7,4 @@ source_url       'https://github.com/osuosl-cookbooks/osl-git-test'
 description      'Installs/Configures osl-git-test'
 version          '0.1.0'
 
-depends          'osl-git'
+depends 'osl-git'

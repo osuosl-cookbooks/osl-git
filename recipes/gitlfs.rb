@@ -35,4 +35,6 @@ yum_repository 'git-lfs' do
   end
 end
 
+apt_update 'osl-git-lfs' if platform_family?('debian')
+
 package 'git-lfs'
