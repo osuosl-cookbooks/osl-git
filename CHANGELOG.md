@@ -3,6 +3,10 @@ osl-git CHANGELOG
 This file is used to list changes made in each version of the
 osl-git cookbook.
 
+1.13.6 (2026-09-21)
+-------------------
+- chef 19 update
+
 1.13.5 (2026-05-11)
 -------------------
 - Pin git cookbook to 12.x and switch to cinc_infra
