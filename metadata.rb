@@ -8,7 +8,7 @@ source_url       'https://github.com/osuosl-cookbooks/osl-git'
 description      'Installs/Configures osl-git'
 version          '1.13.6'
 
-depends 'git', '~> 12.0'
+depends 'git', '~> 13.0.0'
 depends 'line'
 depends 'osl-resources'
 depends 'osl-selinux'

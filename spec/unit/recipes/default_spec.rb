@@ -12,8 +12,16 @@ describe 'osl-git::default' do
       it do
         expect(chef_run).to include_recipe 'osl-selinux'
       end
+
+      case p
+      when *ALL_DEBIAN
+        it { expect(chef_run).to periodic_apt_update('osl-git') }
+      else
+        it { expect(chef_run).to_not periodic_apt_update('osl-git') }
+      end
+
       it do
-        expect(chef_run).to include_recipe 'git'
+        expect(chef_run).to install_git_client('default')
       end
       it do
         expect(chef_run).to include_recipe 'osl-git::gitlfs'
